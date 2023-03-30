@@ -9,7 +9,6 @@ export default function Home() {
   return (
     <>
       <h1>Out travel App</h1>
-      <h3>Nilay repo test</h3>
     </>
   );
 }
