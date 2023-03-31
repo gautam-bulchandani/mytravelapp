@@ -4,9 +4,8 @@ import Destination from "@/models/destination";
 import { MongoClient } from "mongodb";
 
 async function GetReactivistsCollection() {
-  const client = MongoClient.connect(
-    "mongodb+srv://gautam:QrO16pMJu6HXrjfc@gautam.aegjrpy.mongodb.net/Reactivists?retryWrites=true&w=majority"
-  );
+  const dbKey = process.env.DB_Connection_String as string;
+  const client = MongoClient.connect(dbKey);
   const db = (await client).db();
   const collection = db.collection("Reactivists");
   return collection;
