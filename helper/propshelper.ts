@@ -72,8 +72,8 @@ export async function GetAllActivities() {
       istop: activity.istop,
       type: activity.type,
       image: activity.image,
-      review: activity.review,
-      price: activity.price,
+      review: "",
+      price: "",
     })),
   };
 }
