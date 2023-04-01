@@ -17,7 +17,11 @@ const Activity: React.FC<Activity> = (props) => {
  console.log(starList)
   return (
     <>
-    <Hero  data ={props} />
+    <Hero  data={{
+          image:'/img/Products/'+props.image,
+          // title:props.heroData.title,
+          // description:props.heroData.description,
+        }} />
     <section id="service-details" className="service-details">
       <div
         className="container"        

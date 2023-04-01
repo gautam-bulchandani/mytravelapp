@@ -3,7 +3,6 @@ import TileList from "@/components/tile/tilelist";
 import { GetAllDestinations, GetHero } from "@/helper/propshelper";
 
 const DestinationPage = (props: any) => {
-  console.log(props.heroData)
   return (
     <>
       <h1>Destination Page</h1>

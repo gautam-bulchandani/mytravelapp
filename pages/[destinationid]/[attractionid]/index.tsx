@@ -2,6 +2,7 @@ import { GetAllAttractions, GetAttractionDetails } from "@/helper/propshelper";
 import Attraction from "@/models/attraction";
 
 const Attraction: React.FC<Attraction> = (props) => {
+  console.log(props)
   return <h1>{props.name}</h1>;
 };
 export default Attraction;

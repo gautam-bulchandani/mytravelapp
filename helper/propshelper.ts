@@ -2,6 +2,7 @@ import Activity from "@/models/activity";
 import Attraction from "@/models/attraction";
 import Destination from "@/models/destination";
 import Hero from "@/models/hero";
+import TitleBlock from "@/models/titleblock";
 
 import { MongoClient } from "mongodb";
 
@@ -185,3 +186,20 @@ export async function GetHero(page:string) {
     result : res[0],
   };
 }
+
+export async function GetTitleBlock(id:string) {
+  const dictCollection = GetDictionaryCollection();
+  const titleblock = (await dictCollection)
+    .find({ type: "titleblock",id:id })
+    .toArray();
+  const res = (await titleblock).map<TitleBlock>((item)=>({
+    title:item.title,
+    description:item.desc,
+    id:item.id,
+    type:item.type
+  }));
+  return {
+    result : res[0],
+  };
+}
+

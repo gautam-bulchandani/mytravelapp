@@ -1,20 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Activity from "@/models/activity";
 import Link from "next/link";
 import Image from "next/image";
+import TitleBlock from "../common/titleBlock/titleblock";
 
 const ProductListing = (props: any) => {
   let keys = 1;
-  
+  const [prodTitle, setprodTitle] = useState({title:'',description:''});
+  const getTitle = async () => {
+    const prodData = await fetch("/api/gettitle?id="+"products", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => res.json());
+    console.log(prodData.data)
+    setprodTitle(prodData.data);
+  };
+  useEffect(() => {
+    getTitle();
+  }, []);
  
   return (<div>
 
     <section id="projects" className="projects">
       <div className="container">
-        <div className="section-header">
-          <h2>Our Products</h2>
-          <p>Trending and Budget Friendly International Destinations</p>
-        </div>
+      <TitleBlock
+              title={prodTitle.title}
+              description={prodTitle.description}
+            />
         <div className="row gy-4 portfolio-container">
           {props.data.map((activity: Activity) => {
             const stars : any = []

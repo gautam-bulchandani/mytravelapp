@@ -1,3 +1,4 @@
+import TileList from "@/components/tile/tilelist";
 import {
   GetAllDestinations,
   GetDestinationDetails,
@@ -6,8 +7,11 @@ import Destination from "@/models/destination";
 import React from "react";
 
 const Destination: React.FC<Destination> = (props) => {
+  console.log(props.data)
   return (
-    <></>
+    <>
+    <TileList data={props.data} tilesType="destination" />
+    </>
   );
 };
 export default Destination;
