@@ -31,7 +31,8 @@ export default function Home(props:any) {
 
   return (
     <>
-    <TileList data = {props.topDestinations}/>
+    <TileList data = {props.topDestinations} tilesType = 'destination' />
+    <TileList data = {props.topAttractions} tilesType = 'attraction' />
       <h1>Our travel App</h1>
       <form method="post" onSubmit={formSubmitHandler}>
         <input
@@ -54,17 +55,21 @@ export default function Home(props:any) {
 }
 export async function getStaticProps() {
   const allDestinations = await GetAllDestinations();
-  // const allAttraction = await GetAllAttractions();
+  const allAttraction = await GetAllAttractions();
   // const allActivities = await GetAllActivities();
   const topDests = allDestinations.destinations.filter((dest)=>{
     return dest.istop ==='yes' ? true : false
+  })
+  const topAttractions = allAttraction.attractions.filter((attraction)=>{
+    return attraction.istop ==='yes' ? true : false
   })
 
   // console.log(allActivities);
   return {
     props: {
       allDestinations:allDestinations.destinations,
-      topDestinations:topDests
+      topDestinations:topDests,
+      topAttractions:topAttractions
     }
   };
 }

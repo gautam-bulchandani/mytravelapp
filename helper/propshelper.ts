@@ -64,7 +64,7 @@ export async function GetAllActivities() {
     .toArray();
 
   return {
-    actuvuties: (await allActivities).map<Activity>((activity) => ({
+    activities: (await allActivities).map<Activity>((activity) => ({
       name: activity.name,
       title: activity.title,
       shortdescription: activity.shortdescription,
