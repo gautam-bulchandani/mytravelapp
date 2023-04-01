@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Header = () => {
+  const router = useRouter();
+  const path = router.pathname
   return (
     <header id="header" className="header d-flex align-items-center">
       <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
@@ -17,17 +20,17 @@ const Header = () => {
         <nav id="navbar" className="navbar">
           <ul>
             <li>
-              <Link href="/" className="active">
+              <Link href="/" className={'/'===path ? "active" : ""}>
                 Home
               </Link>
             </li>
             <li>
-              <Link href="/destination" className="active">
+              <Link href="/destination" className={'/destination'===path ? "active" : ""}>
                 Destinations
               </Link>
             </li>
             <li>
-              <Link href="/attraction" className="active">
+              <Link href="/attraction" className={'/attraction'===path ? "active" : ""}>
                 Attractions
               </Link>
             </li>
