@@ -4,8 +4,8 @@ const Tile = (props: any) => {
   
   return (
     <>
-      <div className="row gy-4">
-        <div className="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+      
+        <div className="col-lg-6">
           <div className="card-item">
             <Link href={props.tileData.name} className="card-link">
               <div className="row">
@@ -40,7 +40,7 @@ const Tile = (props: any) => {
             </Link>
           </div>
         </div>
-      </div>
+    
     </>
   );
 };

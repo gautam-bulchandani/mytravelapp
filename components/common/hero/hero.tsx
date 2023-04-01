@@ -11,8 +11,6 @@ const Hero = (props:any) => {
           backgroundImage: `url(${props.data.image})`,
           justifyContent:"center"
         }}
-        data-aos="fade-down"
-        data-aos-delay="400"
       >
         <div
           className=""
@@ -22,10 +20,10 @@ const Hero = (props:any) => {
             alignItems: "center",
             display: "flex",
           }}
-          data-aos="fade"
+          
         >
-          <h3 className="whiteFont">{props.data.title}</h3>
-          <p className="whiteFont">
+          <h3 className="white-font">{props.data.title}</h3>
+          <p className="white-font">
             {props.data.description}
           </p>
         </div>
