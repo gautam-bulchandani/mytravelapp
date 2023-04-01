@@ -1,6 +1,18 @@
 import Link from "next/link";
+import { useEffect } from "react";
 
 const Tile = (props: any) => {
+  // let image = '';
+  // useEffect(() => {
+  //   if(props.tileType==='attraction'){
+  //     image = '/img/destinations/'+props.tileData.image;
+  //   }
+  //   if(props.tileType==='destination'){
+  //     image = 'img/Attractions/'+props.tileData.image;
+  //   }
+  // }, [])
+  
+
   
   return (
     <>
@@ -13,7 +25,9 @@ const Tile = (props: any) => {
                   <div
                     className="card-bg"
                     style={{
-                      backgroundImage: `url('https://c4.wallpaperflare.com/wallpaper/179/915/685/photography-water-reflection-bali-wallpaper-preview.jpg')`,
+                      backgroundImage: `url('${props.tileType === "attraction"
+                      ? "/img/Attractions/"+props.tileData.image
+                      : "/img/destinations/"+props.tileData.image}')`,
                     }}
                   ></div>
                 </div>

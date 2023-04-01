@@ -3,6 +3,7 @@ import TitleBlock from "../common/titleBlock/titleblock";
 import Attraction from "@/models/attraction";
 import Tile from "./tile";
 const TileList = (props: any) => {
+  console.log(props.data)
   return (
     <>
       <section id="constructions" className="constructions top-section">
@@ -29,7 +30,7 @@ const TileList = (props: any) => {
             {
               props.tilesType === 'attraction' ? props.data.map((attractions: Attraction) => {
                 return (<>
-                  {attractions.title} <br />
+                  <Tile tileData={attractions} tileType='attraction' /> <br />
                 </>)
               }) : ""
             }
