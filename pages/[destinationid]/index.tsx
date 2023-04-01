@@ -8,11 +8,9 @@ import Destination from "@/models/destination";
 import React from "react";
 
 const Destination: React.FC<Destination> = (props) => {
-  console.log(props.data)
-  
   return (
-    <>   
-    <TileList data={props.data} tilesType="destination" />
+    <>
+      {/* <TileList data={props.data} tilesType="destination" /> */}
       <ProductListing data={props.activity} />
     </>
   );
