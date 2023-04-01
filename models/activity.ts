@@ -7,6 +7,8 @@ interface Activity {
   type: string;
   image: string;
   price: string;
-  review: string;
+  review: number;
+  destination :string;
+  attraction :string;
 }
 export default Activity;
