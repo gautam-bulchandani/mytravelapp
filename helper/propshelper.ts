@@ -1,6 +1,7 @@
 import Activity from "@/models/activity";
 import Attraction from "@/models/attraction";
 import Destination from "@/models/destination";
+
 import { MongoClient } from "mongodb";
 
 async function GetReactivistsCollection() {
@@ -74,5 +75,32 @@ export async function GetAllActivities() {
       review: activity.review,
       price: activity.price,
     })),
+  };
+}
+
+export async function GetDestinationDetails(id: string) {
+  const reactivistsCollection = GetReactivistsCollection();
+  const destination = (await reactivistsCollection).findOne({
+    type: "destination",
+    name: id,
+  });
+  const result = await destination;
+  const destinationData: Destination = {
+    name: result!.name,
+    title: result!.title,
+    shortdescription: result!.shortdescription,
+    description: result!.description,
+    istop: result!.istop,
+    attractions: result!.attracion.map((attraction: Attraction) => {
+      return attraction;
+    }),
+    activity: result!.activity.map((activity: Activity) => {
+      return activity;
+    }),
+    type: result!.type,
+    image: result!.image,
+  };
+  return {
+    destinationDetail: destinationData,
   };
 }

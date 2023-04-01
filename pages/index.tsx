@@ -55,7 +55,6 @@ export async function getStaticProps() {
   const allAttraction = await GetAllAttractions();
   const allActivities = await GetAllActivities();
 
-  console.log(allActivities);
   return {
     props: allDestinations,
   };
