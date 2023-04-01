@@ -2712,3 +2712,6 @@ section {
 .footer .footer-legal .credits a {
   color: var(--color-primary);
 }
+.portfolio-content img{
+  width: 100% !important;
+}

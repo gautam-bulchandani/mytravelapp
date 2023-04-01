@@ -73,8 +73,10 @@ export async function GetAllActivities() {
       istop: activity.istop,
       type: activity.type,
       image: activity.image,
-      review: "",
-      price: "",
+      review: activity.review,
+      price: activity.price,
+      destination : activity.destination,
+      attraction :  activity.attraction
     })),
   };
 }
@@ -148,8 +150,10 @@ export async function GetProductDetails(id: string) {
     istop: result!.istop,
     type: result!.type,
     image: result!.image,
-    review: result!.title,
-    price: result!.title,
+    review: result!.review,
+    price: result!.price,
+    destination : result!.destination,
+    attraction : result!.attraction,
   };
   return {
     activityDetails: activityData,
