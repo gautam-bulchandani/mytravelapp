@@ -6,7 +6,9 @@ import Destination from "@/models/destination";
 import React from "react";
 
 const Destination: React.FC<Destination> = (props) => {
-  return <h1>{props.title}</h1>;
+  return (
+    <></>
+  );
 };
 export default Destination;
 

@@ -3,7 +3,6 @@ import TitleBlock from "../common/titleBlock/titleblock";
 import Attraction from "@/models/attraction";
 import Tile from "./tile";
 const TileList = (props: any) => {
-  console.log(props.data)
   return (
     <>
       <section id="constructions" className="constructions top-section">

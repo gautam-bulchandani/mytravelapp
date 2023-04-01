@@ -1,6 +1,7 @@
 import Activity from "@/models/activity";
 import Attraction from "@/models/attraction";
 import Destination from "@/models/destination";
+import Hero from "@/models/hero";
 
 import { MongoClient } from "mongodb";
 
@@ -153,5 +154,30 @@ export async function GetProductDetails(id: string) {
   };
   return {
     activityDetails: activityData,
+  };
+}
+
+async function GetDictionaryCollection() {
+  const dbKey = process.env.DB_Connection_String as string;
+  const client = MongoClient.connect(dbKey);
+  const db = (await client).db();
+  const collection = db.collection("Dictionary");
+  (await client).close;
+  return collection;
+}
+
+export async function GetHero(page:string) {
+  const dictCollection = GetDictionaryCollection();
+  const hero = (await dictCollection)
+    .find({ type: "hero",page:page })
+    .toArray();
+  const res = (await hero).map<Hero>((item)=>({
+    title:item.title,
+    description:item.description,
+    type:item.type,
+    image:item.image,
+  }));
+  return {
+    result : res[0],
   };
 }
