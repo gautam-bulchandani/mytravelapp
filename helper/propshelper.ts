@@ -105,22 +105,52 @@ export async function GetDestinationDetails(id: string) {
   };
 }
 
-export async function GetAttractionDetails(destinationid:string,attractionid: string) {
-  const destination = await GetDestinationDetails(destinationid);
-  const attractions = await destination.destinationDetail.attractions;
-  const attractionDetails = attractions.filter(attr=>{
-    return attr.name===attractionid ? true : false
-  })
-  
-  return{
-    attractionDetails: attractionDetails[0],
-  }
+export async function GetAttractionDetails(id: string) {
+  const reactivistsCollection = GetReactivistsCollection();
+  const attracion = (await reactivistsCollection).findOne({
+    type: "attraction",
+    name: id,
+  });
+  const result = await attracion;
+  if (result == null) return null;
+  const attractionnData: Attraction = {
+    name: result!.name,
+    title: result!.title,
+    shortdescription: result!.shortdescription,
+    description: result!.description,
+    istop: result!.istop,
+
+    activity: result!.activity.map((activity: Activity) => {
+      return activity;
+    }),
+    type: result!.type,
+    image: result!.image,
+  };
+  return {
+    attractionDetail: attractionnData,
+  };
 }
 
-export async function GetSpecificAttractions(destinationid:string) {
-  const destination = await GetDestinationDetails(destinationid);
-  const attractions = destination.destinationDetail.attractions;
-  return{
-    attractions : attractions,
-  }
+export async function GetProductDetails(id: string) {
+  const reactivistsCollection = GetReactivistsCollection();
+  const activity = (await reactivistsCollection).findOne({
+    type: "activity",
+    name: id,
+  });
+  const result = await activity;
+  if (result == null) return null;
+  const activityData: Activity = {
+    name: result!.name,
+    title: result!.title,
+    shortdescription: result!.shortdescription,
+    description: result!.description,
+    istop: result!.istop,
+    type: result!.type,
+    image: result!.image,
+    review: result!.title,
+    price: result!.title,
+  };
+  return {
+    activityDetails: activityData,
+  };
 }
