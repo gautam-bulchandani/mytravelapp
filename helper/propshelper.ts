@@ -9,6 +9,7 @@ async function GetReactivistsCollection() {
   const client = MongoClient.connect(dbKey);
   const db = (await client).db();
   const collection = db.collection("Reactivists");
+  (await client).close;
   return collection;
 }
 
