@@ -104,3 +104,30 @@ export async function GetDestinationDetails(id: string) {
     destinationDetail: destinationData,
   };
 }
+
+export async function GetAttractionDetails(id: string) {
+  console.log(id);
+  const reactivistsCollection = GetReactivistsCollection();
+  const attracion = (await reactivistsCollection).findOne({
+    type: "attraction",
+    name: id,
+  });
+  const result = await attracion;
+  if (result == null) return null;
+  const attractionnData: Attraction = {
+    name: result!.name,
+    title: result!.title,
+    shortdescription: result!.shortdescription,
+    description: result!.description,
+    istop: result!.istop,
+
+    activity: result!.activity.map((activity: Activity) => {
+      return activity;
+    }),
+    type: result!.type,
+    image: result!.image,
+  };
+  return {
+    attractionDetail: attractionnData,
+  };
+}
