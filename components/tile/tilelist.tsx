@@ -1,6 +1,7 @@
 import Destination from "@/models/destination";
 import TitleBlock from "../common/titleBlock/titleblock";
 import Attraction from "@/models/attraction";
+import Tile from "./tile";
 const TileList = (props:any)=>{
   return(
     <>
@@ -16,7 +17,7 @@ const TileList = (props:any)=>{
     {
       props.tilesType==='destination' ? props.data.map((destination:Destination)=>{
         return(<>
-        {destination.title} <br />
+        <Tile tileData = {destination} tileType='destination' />
         </>)
       }) : ""
     }

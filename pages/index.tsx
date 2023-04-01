@@ -7,7 +7,7 @@ import {
   GetAllDestinations,
 } from "@/helper/propshelper";
 import { FormEvent, useRef } from "react";
-import TileList from "@/components/tile/titlelist";
+import TileList from "@/components/tile/tilelist";
 
 export default function Home(props:any) {
   const nameReference = useRef<HTMLInputElement>(null);
@@ -67,7 +67,6 @@ export async function getStaticProps() {
   // console.log(allActivities);
   return {
     props: {
-      allDestinations:allDestinations.destinations,
       topDestinations:topDests,
       topAttractions:topAttractions
     }
