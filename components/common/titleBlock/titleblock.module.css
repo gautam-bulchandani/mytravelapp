@@ -1,0 +1,33 @@
+
+.sectionHeader {
+  text-align: center;
+  padding-bottom: 70px;
+}
+
+.sectionHeader h2 {
+  font-size: 32px;
+  font-weight: 700;
+  position: relative;
+  color: #2e3135;
+}
+
+.sectionHeader h2:before,
+.sectionHeader h2:after {
+  content: "";
+  width: 50px;
+  height: 2px;
+  background: #feb900;
+  display: inline-block;
+}
+
+.sectionHeader h2:before {
+  margin: 0 15px 10px 0;
+}
+
+.sectionHeader h2:after {
+  margin: 0 0 10px 15px;
+}
+
+.sectionHeader p {
+  margin: 0 auto 0 auto;
+}
