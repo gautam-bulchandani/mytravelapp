@@ -1,5 +1,5 @@
 import Destination from "@/models/destination";
-import TitleBlock from "../common/titleBlock/TitleBlock";
+import TitleBlock from "../common/titleBlock/titleblock";
 const TileList = (props:any)=>{
   return(
     <>
