@@ -104,3 +104,23 @@ export async function GetDestinationDetails(id: string) {
     destinationDetail: destinationData,
   };
 }
+
+export async function GetAttractionDetails(destinationid:string,attractionid: string) {
+  const destination = await GetDestinationDetails(destinationid);
+  const attractions = await destination.destinationDetail.attractions;
+  const attractionDetails = attractions.filter(attr=>{
+    return attr.name===attractionid ? true : false
+  })
+  
+  return{
+    attractionDetails: attractionDetails[0],
+  }
+}
+
+export async function GetSpecificAttractions(destinationid:string) {
+  const destination = await GetDestinationDetails(destinationid);
+  const attractions = destination.destinationDetail.attractions;
+  return{
+    attractions : attractions,
+  }
+}
