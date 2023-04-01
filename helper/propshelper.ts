@@ -106,7 +106,6 @@ export async function GetDestinationDetails(id: string) {
 }
 
 export async function GetAttractionDetails(id: string) {
-  console.log(id);
   const reactivistsCollection = GetReactivistsCollection();
   const attracion = (await reactivistsCollection).findOne({
     type: "attraction",
@@ -129,5 +128,29 @@ export async function GetAttractionDetails(id: string) {
   };
   return {
     attractionDetail: attractionnData,
+  };
+}
+
+export async function GetProductDetails(id: string) {
+  const reactivistsCollection = GetReactivistsCollection();
+  const activity = (await reactivistsCollection).findOne({
+    type: "activity",
+    name: id,
+  });
+  const result = await activity;
+  if (result == null) return null;
+  const activityData: Activity = {
+    name: result!.name,
+    title: result!.title,
+    shortdescription: result!.shortdescription,
+    description: result!.description,
+    istop: result!.istop,
+    type: result!.type,
+    image: result!.image,
+    review: result!.title,
+    price: result!.title,
+  };
+  return {
+    activityDetails: activityData,
   };
 }
