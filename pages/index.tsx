@@ -8,6 +8,7 @@ import {
 } from "@/helper/propshelper";
 import { FormEvent, useRef } from "react";
 import TileList from "@/components/tile/titlelist";
+import ProductListing from "@/components/Products/productslist";
 
 export default function Home(props:any) {
   const nameReference = useRef<HTMLInputElement>(null);
@@ -31,8 +32,10 @@ export default function Home(props:any) {
 
   return (
     <>
+    
     <TileList data = {props.topDestinations} tilesType = 'destination' />
     <TileList data = {props.topAttractions} tilesType = 'attraction' />
+    <ProductListing data={props.allActivities} />
       <h1>Our travel App</h1>
       <form method="post" onSubmit={formSubmitHandler}>
         <input
@@ -56,7 +59,7 @@ export default function Home(props:any) {
 export async function getStaticProps() {
   const allDestinations = await GetAllDestinations();
   const allAttraction = await GetAllAttractions();
-  // const allActivities = await GetAllActivities();
+   const allActivities = await GetAllActivities();
   const topDests = allDestinations.destinations.filter((dest)=>{
     return dest.istop ==='yes' ? true : false
   })
@@ -69,7 +72,8 @@ export async function getStaticProps() {
     props: {
       allDestinations:allDestinations.destinations,
       topDestinations:topDests,
-      topAttractions:topAttractions
+      topAttractions:topAttractions,
+      allActivities : allActivities.activities,
     }
   };
 }
