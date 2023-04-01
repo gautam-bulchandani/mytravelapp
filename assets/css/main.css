@@ -2715,3 +2715,6 @@ section {
 .portfolio-content img{
   width: 100% !important;
 }
+.right-label {
+  float: right;
+}

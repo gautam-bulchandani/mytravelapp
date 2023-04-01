@@ -1,3 +1,4 @@
+import ProductListing from "@/components/Products/productslist";
 import {
   GetAllDestinations,
   GetDestinationDetails,
@@ -6,8 +7,12 @@ import Destination from "@/models/destination";
 import React from "react";
 
 const Destination: React.FC<Destination> = (props) => {
+
+  
   return (
-    <></>
+    <>   
+      <ProductListing data={props.activity} />
+    </>
   );
 };
 export default Destination;

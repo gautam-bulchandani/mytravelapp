@@ -32,7 +32,8 @@ const ProductListing = (props: any) => {
                   <Image src={`/img/Attractions/${activity.image}`} className="img-fluid" width={300} height={200} alt="" />
                   <div className="portfolio-info">
                     <h4>{stars}</h4>
-                    <p>{activity.name}</p>
+                    <h4 className="right-label">{activity.price}</h4>
+                    <p>{activity.title}</p>
                     {/* <Link href={activity.image} title={activity.title} data-gallery="portfolio-gallery-book" className="glightbox preview-link"><i className="bi bi-zoom-in"></i></Link> */}
                     <Link href={`/${activity.destination}/${activity.attraction}/${activity.name}`} title="More Details" className="details-link"><i className="bi bi-link-45deg"></i></Link>
                   </div>
