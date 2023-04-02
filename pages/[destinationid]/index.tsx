@@ -6,11 +6,17 @@ import {
 } from "@/helper/propshelper";
 import Destination from "@/models/destination";
 import React from "react";
+import Hero from "@/components/common/hero/hero";
 
 const Destination: React.FC<Destination> = (props) => {
   return (
     <>
-      {/* <TileList data={props.data} tilesType="destination" /> */}
+    <Hero data={{
+          image:'/img/hero-carousel/'+props.heroImage,
+          title:props.title,
+          description:props.description,
+        }}/>
+    <TileList data={props.attractions} tilesType="attraction" />
       <ProductListing data={props.activity} />
     </>
   );

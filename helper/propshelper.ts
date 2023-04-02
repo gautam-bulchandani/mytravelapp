@@ -51,6 +51,7 @@ export async function GetAllDestinations() {
       }),
       type: destination.type,
       image: destination.image,
+      heroImage: destination.heroImage,
     })),
   };
 }
@@ -76,6 +77,8 @@ export async function GetAllAttractions() {
       }),
       type: attracion.type,
       image: attracion.image,
+      destination:attracion.destination,
+      heroImage: attracion.heroImage,
     })),
   };
 }
@@ -102,6 +105,7 @@ export async function GetAllActivities() {
       price: activity.price,
       destination: activity.destination,
       attraction: activity.attraction,
+      heroImage: activity.heroImage
     })),
   };
 }
@@ -132,6 +136,7 @@ export async function GetDestinationDetails(id: string) {
     }),
     type: result!.type,
     image: result!.image,
+    heroImage: result!.heroImage,
   };
   return {
     destinationDetail: destinationData,
@@ -164,6 +169,8 @@ export async function GetAttractionDetails(id: string) {
     }),
     type: result!.type,
     image: result!.image,
+    heroImage: result!.heroImage,
+    destination: result!.destination,
   };
   return {
     attractionDetail: attractionnData,
@@ -193,8 +200,9 @@ export async function GetProductDetails(id: string) {
     image: result!.image,
     review: result!.review,
     price: result!.price,
-    destination: result!.destination,
-    attraction: result!.attraction,
+    destination : result!.destination,
+    attraction : result!.attraction,
+    heroImage: result!.heroImage,
   };
   return {
     activityDetails: activityData,
