@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { sendEmail } from "@/helper/emailer";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { render } from "react-dom";
 
 type Data = {
   message: string;
@@ -11,10 +12,16 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   const data = req.body;
+  const message = `
+    Name : ${data.name} <br/>
+    Phone : ${data.phone} <br/>
+    Product Name : ${data.productName} <br/>
+    Message : ${data.message} <br/>
+  `
   await sendEmail({
     to: data.email,
     subject: "New email for product enquiry",
-    html: data.name,
+    html : message,
   });
 
   return res.status(200).json({ message: "Email sent successfully" });
