@@ -1,9 +1,10 @@
 import ProductListing from "@/components/Products/productslist";
 import Hero from "@/components/common/hero/hero";
+import TileList from "@/components/tile/tilelist";
 import { GetAllAttractions, GetAttractionDetails } from "@/helper/propshelper";
-import Attraction from "@/models/attraction";
 
-const Attraction: React.FC<Attraction> = (props) => {
+
+const Attraction = (props:any) => {
   return (
     <>
     <Hero data={{
@@ -11,7 +12,8 @@ const Attraction: React.FC<Attraction> = (props) => {
           title:props.title,
           description:props.description,
         }}/>
-      <ProductListing data={props.activity} />
+      <ProductListing data={props.attractionDetail.activity} />
+      {props.relatedAttr.length != 0 ? <TileList data={props.relatedAttr} tilesType="relattraction" /> : ""}
     </>
   );
 };
@@ -27,14 +29,24 @@ export default Attraction;
 //     fallback: false,
 //   };
 // }
-export async function getServerSideProps(context: any) {
+export async function getServerSideProps(context: {
+  params: { attractionid: string , destinationid:string};
+}) {
   const result = GetAttractionDetails(context.params.attractionid);
   const getAttractionDetail = await result;
+  const attrData = GetAllAttractions();
+  const relatedAttr = (await attrData).attractions.filter((attr)=>{
+    return attr.name==context.params.attractionid || attr.destination !=context.params.destinationid  ? false : true
+  })
+
   if (getAttractionDetail == null)
     return {
       notFound: true,
     };
   else {
-    return { props: getAttractionDetail.attractionDetail };
+    return { props: {
+      attractionDetail : getAttractionDetail.attractionDetail,
+      relatedAttr : relatedAttr
+    } };
   }
 }

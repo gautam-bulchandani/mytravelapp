@@ -30,7 +30,6 @@ const AddReviewForm: React.FC<{ AddReview: () => void }> = (props) => {
 
     const status = (await response).status;
     if (status === 201) {
-      console.log("lol");
       SetReviewStatus("success");
       props.AddReview();
     } else {

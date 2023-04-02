@@ -3062,7 +3062,7 @@
           }
         }
 
-        console.log('playSlideVideo is deprecated, use slidePlayerPlay');
+        ('playSlideVideo is deprecated, use slidePlayerPlay');
         var player = this.getSlidePlayerInstance(slide);
 
         if (player && !player.playing) {

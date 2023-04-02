@@ -73,7 +73,6 @@ export async function getStaticProps() {
   const destTitle = await GetTitleBlock("destination");
   const attrTitle = await GetTitleBlock("attraction");
   const heroData = await GetHero("home");
-  console.log(topDests);
   return {
     props: {
       topDestinations: topDests,

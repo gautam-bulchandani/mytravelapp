@@ -4,12 +4,10 @@ import Attraction from "@/models/attraction";
 import Tile from "./tile";
 import { useEffect, useState } from "react";
 const TileList = (props: any) => {
-  if(props.tilesType==='attraction'){
-    console.log('attractions');
-    console.log(props.data);
-  }
+  
   const [destTitle, setdestTitle] = useState({ title: "", description: "" });
   const [attrTitle, setattrTitle] = useState({ title: "", description: "" });
+  const [relattrTitle, setrelattrTitle] = useState({ title: "", description: "" });
   const getTitle = async () => {
     const destdata = await fetch("/api/gettitle?id=" + "destination", {
       method: "GET",
@@ -26,6 +24,14 @@ const TileList = (props: any) => {
       },
     }).then((res) => res.json());
     setattrTitle(attrdata.data);
+
+    const relAttrdata = await fetch("/api/gettitle?id=" + "relatedattr", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => res.json());
+    setrelattrTitle(relAttrdata.data);
   };
   useEffect(() => {
     getTitle();
@@ -50,21 +56,30 @@ const TileList = (props: any) => {
           ) : (
             ""
           )}
+          {props.tilesType === "relattraction" ? (
+            <TitleBlock
+              title={relattrTitle.title}
+              description={relattrTitle.description}
+            />
+          ) : (
+            ""
+          )}
           <div className="row gy-4">
             {props.tilesType === "destination"
               ? props.data.map((destination: Destination) => {
                   return (
                     <>
-                      <Tile tileData={destination} tileType="destination" />
+                      <Tile key={destination.name} tileData={destination} tileType="destination" />
                     </>
                   );
                 })
               : ""}
-            {props.tilesType === "attraction"
+              
+            {props.tilesType === "attraction" || props.tilesType ==='relattraction'
               ? props.data.map((attractions: Attraction) => {
                   return (
                     <>
-                      <Tile tileData={attractions} tileType="attraction" />{" "}
+                      <Tile key={attractions.name} tileData={attractions} tileType="attraction" />{" "}
                       <br />
                     </>
                   );
