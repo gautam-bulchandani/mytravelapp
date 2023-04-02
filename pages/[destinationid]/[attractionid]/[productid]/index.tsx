@@ -34,7 +34,7 @@ const Activity: React.FC<Activity> = (props) => {
                   { starList }
               </div>
             </div>
-            <SendEmail/>
+            <SendEmail data = {props.title} />
             
           </div>
 

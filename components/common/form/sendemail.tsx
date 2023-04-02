@@ -1,7 +1,8 @@
 import { FormEvent, useRef, useState } from "react";
 
-export default function SendEmail() {
+export default function SendEmail( props:any ) {
   const [submitted, setSubmitted] = useState(false);  
+  const [loading, setLoading] = useState(false)
   const nameReference = useRef<HTMLInputElement>(null);
   const emailReference = useRef<HTMLInputElement>(null);
   const phoneReference = useRef<HTMLInputElement>(null);
@@ -17,7 +18,8 @@ export default function SendEmail() {
       productName: prodnameReference.current!.value,
       message: messageReference.current!.value
     };
-
+    try{
+      setLoading(true)
     const response = await fetch("/api/sendemail", {
       method: "POST",
       body: JSON.stringify(emailBody),
@@ -25,10 +27,15 @@ export default function SendEmail() {
         "Content-Type": "application/json",
       },
     });
-   
-    if(response.ok){
-      setSubmitted(true);
-    }
+
+  }catch(error){
+
+  }
+  finally{
+    setLoading(false);
+    setSubmitted(true);
+  }
+    
   };
 
   return (
@@ -53,11 +60,11 @@ export default function SendEmail() {
                 </div>
 
                 <div className="col-md-12">
-                  <input type="text" className="form-control" name="phone" placeholder="Phone" ref={phoneReference} required />
+                  <input type="tel" className="form-control" name="phone" placeholder="Phone" ref={phoneReference}  required  />
                 </div>
 				
-				<div className="col-md-12">
-                  <input type="text" className="form-control" name="productName" placeholder="Product Name" ref={prodnameReference} required />
+				        <div className="col-md-12">
+                  <input type="text" className="form-control" defaultValue={props.data}  name="productName" placeholder="Product Name" ref={prodnameReference} required />
                 </div>
 
                 <div className="col-md-12">
@@ -80,6 +87,7 @@ export default function SendEmail() {
 
       </div>
         }
+        {loading && <div className="loading">Loading......</div>}
       {submitted && <div className="sent-message">Thank you! Your Enquiry has been submitted.</div>}
     </section>
   );
