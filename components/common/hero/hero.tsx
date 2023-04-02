@@ -1,6 +1,5 @@
 import styles from "./hero.module.css";
 const Hero = (props:any) => {
-  console.log(props.data)
   return (
     <>
       <div

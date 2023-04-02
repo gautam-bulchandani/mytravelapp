@@ -57,6 +57,7 @@ export async function GetAllAttractions() {
       }),
       type: attracion.type,
       image: attracion.image,
+      destination:attracion.destination,
     })),
   };
 }
@@ -104,6 +105,7 @@ export async function GetDestinationDetails(id: string) {
     }),
     type: result!.type,
     image: result!.image,
+    heroImage: result!.heroImage,
   };
   return {
     destinationDetail: destinationData,
@@ -130,6 +132,7 @@ export async function GetAttractionDetails(id: string) {
     }),
     type: result!.type,
     image: result!.image,
+    heroImage: result!.heroImage,
   };
   return {
     attractionDetail: attractionnData,
@@ -156,6 +159,7 @@ export async function GetProductDetails(id: string) {
     price: result!.price,
     destination : result!.destination,
     attraction : result!.attraction,
+    heroImage: result!.heroImage,
   };
   return {
     activityDetails: activityData,

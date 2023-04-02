@@ -9,5 +9,7 @@ interface Attraction {
   type: string;
   image: string;
   activity: Activity[];
+  destination:string;
+  heroImage:string;
 }
 export default Attraction;
