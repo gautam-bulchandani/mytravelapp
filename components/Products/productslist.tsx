@@ -32,7 +32,6 @@ const ProductListing = (props: any) => {
           {props.data.map((activity: Activity) => {
             const stars : any = []
             keys = keys+1;
-            console.log(keys);
             for(var i=0;i<activity.review;i++){
               stars.push(<i className="bi bi-star-fill"></i>)
             }

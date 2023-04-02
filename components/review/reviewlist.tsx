@@ -5,7 +5,6 @@ import ReviewItem from "./reviewitem";
 const ReviewList: React.FC<{ items: Review[]; DeleteReview: () => void }> = (
   props
 ) => {
-  console.log(props.items);
   return (
     <section id="recent-blog-posts" className="recent-blog-posts">
       <div className="container">
