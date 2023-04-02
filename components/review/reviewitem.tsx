@@ -62,7 +62,7 @@ const ReviewItem: React.FC<{ item: Review; deleteBlog: () => void }> = (
             ""
           )}
           <span
-            className="readmore stretched-link"
+            className="readmore"
             onClick={deleteItemHandler.bind(null, props.item.name)}
           >
             Delete this Review
