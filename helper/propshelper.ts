@@ -1,15 +1,26 @@
 import Activity from "@/models/activity";
 import Attraction from "@/models/attraction";
 import Destination from "@/models/destination";
+import Review from "@/models/review";
 
 import { MongoClient } from "mongodb";
+import { connectToDatabase } from "./mongoclient";
 
 async function GetReactivistsCollection() {
-  const dbKey = process.env.DB_Connection_String as string;
-  const client = MongoClient.connect(dbKey);
-  const db = (await client).db();
+  const client = await connectToDatabase();
+
+  const db = client.db();
   const collection = db.collection("Reactivists");
-  (await client).close;
+  client.close;
+  return collection;
+}
+
+async function GetReactivistsReviewCollection() {
+  const client = await connectToDatabase();
+
+  const db = client.db();
+  const collection = db.collection("Reviews");
+  client.close;
   return collection;
 }
 
@@ -153,5 +164,18 @@ export async function GetProductDetails(id: string) {
   };
   return {
     activityDetails: activityData,
+  };
+}
+export async function GetAllReviews() {
+  const reactivistsCollection = GetReactivistsReviewCollection();
+  const allReviews = (await reactivistsCollection).find().toArray();
+  return {
+    reviews: (await allReviews).map<Review>((review) => ({
+      name: review.name,
+      email: review.email,
+      phone: review.phone,
+      message: review.message,
+      imageurl: review.imageurl,
+    })),
   };
 }
