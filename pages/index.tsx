@@ -41,11 +41,11 @@ export default function Home(props: any) {
 
   return (
     <>
-    <Hero
+      <Hero
         data={{
-          image:'/img/hero-carousel/'+props.heroData.image,
-          title:props.heroData.title,
-          description:props.heroData.description,
+          image: "/img/hero-carousel/" + props.heroData.image,
+          title: props.heroData.title,
+          description: props.heroData.description,
         }}
       />
       <TileList data={props.topDestinations} tilesType="destination" />
@@ -72,15 +72,16 @@ export async function getStaticProps() {
   });
   const destTitle = await GetTitleBlock("destination");
   const attrTitle = await GetTitleBlock("attraction");
-  const heroData = await GetHero('home');
-  console.log(topDests)
+  const heroData = await GetHero("home");
+  console.log(topDests);
   return {
     props: {
       topDestinations: topDests,
       topAttractions: topAttractions,
       allActivities: allActivities.activities,
       allReviews: allReviews.reviews,
-      heroData:heroData.result,
+      heroData: heroData.result,
     },
+    revalidate: 60,
   };
 }

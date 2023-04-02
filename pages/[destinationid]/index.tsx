@@ -11,12 +11,14 @@ import Hero from "@/components/common/hero/hero";
 const Destination: React.FC<Destination> = (props) => {
   return (
     <>
-    <Hero data={{
-          image:'/img/hero-carousel/'+props.heroImage,
-          title:props.title,
-          description:props.description,
-        }}/>
-    <TileList data={props.attractions} tilesType="attraction" />
+      <Hero
+        data={{
+          image: "/img/hero-carousel/" + props.heroImage,
+          title: props.title,
+          description: props.description,
+        }}
+      />
+      <TileList data={props.attractions} tilesType="attraction" />
       <ProductListing data={props.activity} />
     </>
   );
@@ -39,5 +41,8 @@ export async function getStaticProps<context>(context: {
   const getDestinationDetail = GetDestinationDetails(
     context.params.destinationid
   );
-  return { props: (await getDestinationDetail).destinationDetail };
+  return {
+    props: (await getDestinationDetail).destinationDetail,
+    revalidate: 60,
+  };
 }
