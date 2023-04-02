@@ -1,11 +1,16 @@
 import ProductListing from "@/components/Products/productslist";
+import Hero from "@/components/common/hero/hero";
 import { GetAllAttractions, GetAttractionDetails } from "@/helper/propshelper";
 import Attraction from "@/models/attraction";
 
 const Attraction: React.FC<Attraction> = (props) => {
   return (
     <>
-      <h1>{props.name}</h1>
+    <Hero data={{
+          image:'/img/hero-carousel/'+props.heroImage,
+          title:props.title,
+          description:props.description,
+        }}/>
       <ProductListing data={props.activity} />
     </>
   );

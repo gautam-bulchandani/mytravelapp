@@ -11,5 +11,6 @@ interface Destination {
   image: string;
   attractions: Attraction[];
   activity: Activity[];
+  heroImage:string;
 }
 export default Destination;

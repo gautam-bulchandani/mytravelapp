@@ -14,7 +14,6 @@ const ProductListing = (props: any) => {
         "Content-Type": "application/json",
       },
     }).then((res) => res.json());
-    console.log(prodData.data)
     setprodTitle(prodData.data);
   };
   useEffect(() => {

@@ -4,7 +4,10 @@ import Attraction from "@/models/attraction";
 import Tile from "./tile";
 import { useEffect, useState } from "react";
 const TileList = (props: any) => {
-  console.log(props.data);
+  if(props.tilesType==='attraction'){
+    console.log('attractions');
+    console.log(props.data);
+  }
   const [destTitle, setdestTitle] = useState({ title: "", description: "" });
   const [attrTitle, setattrTitle] = useState({ title: "", description: "" });
   const getTitle = async () => {
@@ -25,8 +28,6 @@ const TileList = (props: any) => {
     setattrTitle(attrdata.data);
   };
   useEffect(() => {
-    console.log('useeffect');
-    console.log(props.data);
     getTitle();
   }, []);
   return (
@@ -43,8 +44,8 @@ const TileList = (props: any) => {
           )}
           {props.tilesType === "attraction" ? (
             <TitleBlock
-              title="Top Activities"
-              description="World's Most Booked Activities are listed below for you."
+              title={attrTitle.title}
+              description={attrTitle.description}
             />
           ) : (
             ""

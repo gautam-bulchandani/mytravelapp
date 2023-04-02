@@ -10,7 +10,7 @@ const Tile = (props: any) => {
             href={
               props.tileType === "destination"
                 ? props.tileData.name
-                : props.tileType + "/" + props.tileData.name
+                : props.tileData.destination + "/" + props.tileData.name
             }
             className="card-link"
           >

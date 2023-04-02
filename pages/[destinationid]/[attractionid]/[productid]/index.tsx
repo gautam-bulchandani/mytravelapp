@@ -6,7 +6,6 @@ import Image from "next/image";
 import Hero from "@/components/common/hero/hero";
 
 const Activity: React.FC<Activity> = (props) => {
-  console.log(props.review)
   const starList = []
 
   for(var i=0;i<props.review;i++){
@@ -15,14 +14,13 @@ const Activity: React.FC<Activity> = (props) => {
   for(var i=0;i< 5-props.review;i++){
     starList.push(<i className="bi bi-star"></i>)
   }
- console.log(starList)
   return (
     <>
-    <Hero  data={{
-          image:'/img/Products/'+props.image,
-          // title:props.heroData.title,
-          // description:props.heroData.description,
-        }} />
+    <Hero data={{
+          image:'/img/hero-carousel/'+props.heroImage,
+          title:props.title,
+          description:props.description,
+        }}/>
     <section id="service-details" className="service-details">
       <div
         className="container"        

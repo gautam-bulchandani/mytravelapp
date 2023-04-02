@@ -10,5 +10,6 @@ interface Activity {
   review: number;
   destination :string;
   attraction :string;
+  heroImage:string;
 }
 export default Activity;

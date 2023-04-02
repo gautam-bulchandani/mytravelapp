@@ -6,6 +6,7 @@ import {
   GetAllAttractions,
   GetAllDestinations,
   GetAllReviews,
+  GetHero,
   GetTitleBlock,
 } from "@/helper/propshelper";
 import { FormEvent, useEffect, useRef, useState } from "react";
@@ -13,6 +14,7 @@ import TileList from "@/components/tile/tilelist";
 import ProductListing from "@/components/Products/productslist";
 import AddReviewForm from "@/components/review/addreviews";
 import ReviewList from "@/components/review/reviewlist";
+import Hero from "@/components/common/hero/hero";
 
 export default function Home(props: any) {
   const [reviewAdded, ReviewAddedStatus] = useState(0);
@@ -39,6 +41,13 @@ export default function Home(props: any) {
 
   return (
     <>
+    <Hero
+        data={{
+          image:'/img/hero-carousel/'+props.heroData.image,
+          title:props.heroData.title,
+          description:props.heroData.description,
+        }}
+      />
       <TileList data={props.topDestinations} tilesType="destination" />
       <TileList data={props.topAttractions} tilesType="attraction" />
       <ProductListing data={props.allActivities} />
@@ -63,14 +72,15 @@ export async function getStaticProps() {
   });
   const destTitle = await GetTitleBlock("destination");
   const attrTitle = await GetTitleBlock("attraction");
-  console.log(destTitle);
-  // console.log(allActivities);
+  const heroData = await GetHero('home');
+  console.log(topDests)
   return {
     props: {
       topDestinations: topDests,
       topAttractions: topAttractions,
       allActivities: allActivities.activities,
       allReviews: allReviews.reviews,
+      heroData:heroData.result,
     },
   };
 }
