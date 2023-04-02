@@ -2,7 +2,7 @@ import Head from "next/head";
 import { ReactElement } from "react";
 import FooterSection from "./footersection";
 import Header from "./header";
-
+import Script from 'next/script'
 const Layout: React.FC<{ children: ReactElement }> = (props) => {
   return (
     <>
@@ -15,7 +15,7 @@ const Layout: React.FC<{ children: ReactElement }> = (props) => {
       <Header />
       <main>{props.children}</main>
       <FooterSection />
-      <script type="text/javascript" src="/js/header.js"></script>
+      <Script type="text/javascript" src="/js/header.js"></Script>
     </>
   );
 };
