@@ -25,7 +25,7 @@ const ReviewItem: React.FC<{ item: Review; deleteBlog: () => void }> = (
   };
 
   return (
-    <div className="col-xl-4 col-md-6">
+    <div className="col-xl-4 col-md-6" key={props.item.name}>
       <div className="post-item position-relative h-100">
         <div className="post-img position-relative overflow-hidden">
           <Image

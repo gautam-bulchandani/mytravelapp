@@ -5,7 +5,6 @@ import { GetAllDestinations, GetHero } from "@/helper/propshelper";
 const DestinationPage = (props: any) => {
   return (
     <>
-      <h1>Destination Page</h1>
       <Hero
         data={{
           image: "/img/hero-carousel/" + props.heroData.image,
