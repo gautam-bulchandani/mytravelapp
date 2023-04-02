@@ -606,6 +606,10 @@ section {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+.get-started .php-email-form h2{
+  text-align: center;
+  padding-bottom: 15px;
+}
 
 .get-started .php-email-form p {
   font-size: 14px;
@@ -2715,3 +2719,8 @@ section {
 .right-label {
   float: right;
 }
+@media screen and (max-width : 768px){
+  .projects .portfolio-content .portfolio-info {
+    opacity: 1;
+  }
+} 
