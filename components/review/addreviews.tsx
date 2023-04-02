@@ -88,8 +88,8 @@ const AddReviewForm: React.FC<{ AddReview: () => void }> = (props) => {
                   <input
                     type="text"
                     className="form-control"
-                    name="phone"
-                    placeholder="Phone"
+                    name="image"
+                    placeholder="Image Url"
                     ref={imageReference}
                   ></input>
                 </div>

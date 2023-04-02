@@ -29,7 +29,7 @@ const ReviewItem: React.FC<{ item: Review; deleteBlog: () => void }> = (
       <div className="post-item position-relative h-100">
         <div className="post-img position-relative overflow-hidden">
           <Image
-            src={`/img/blog/+ ${props.item.imageurl}`}
+            src={`/img/blog/${props.item.imageurl}`}
             className="img-fluid"
             alt=""
             width={400}
@@ -55,7 +55,7 @@ const ReviewItem: React.FC<{ item: Review; deleteBlog: () => void }> = (
 
           <hr></hr>
           {reviewStatus === "loading" ? (
-            <div className="loading">Deleting this item </div>
+            <div className="loading">Deleting this review... </div>
           ) : reviewStatus === "error" ? (
             <div className="error-message">Something went wrong</div>
           ) : (
