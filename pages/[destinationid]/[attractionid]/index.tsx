@@ -8,9 +8,9 @@ const Attraction = (props:any) => {
   return (
     <>
     <Hero data={{
-          image:'/img/hero-carousel/'+props.heroImage,
-          title:props.title,
-          description:props.description,
+          image:'/img/hero-carousel/'+props.attractionDetail.heroImage,
+          title:props.attractionDetail.title,
+          description:props.attractionDetail.description,
         }}/>
       <ProductListing data={props.attractionDetail.activity} />
       {props.relatedAttr.length != 0 ? <TileList data={props.relatedAttr} tilesType="relattraction" /> : ""}
