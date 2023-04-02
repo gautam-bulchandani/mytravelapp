@@ -1,6 +1,6 @@
 import { FormEvent, useRef, useState } from "react";
 
-export default function SendEmail( ) {
+export default function SendEmail( props:any ) {
   const [submitted, setSubmitted] = useState(false);  
   const [loading, setLoading] = useState(false)
   const nameReference = useRef<HTMLInputElement>(null);
@@ -64,7 +64,7 @@ export default function SendEmail( ) {
                 </div>
 				
 				        <div className="col-md-12">
-                  <input type="text" className="form-control"  name="productName" placeholder="Product Name" ref={prodnameReference} required />
+                  <input type="text" className="form-control" defaultValue={props.data}  name="productName" placeholder="Product Name" ref={prodnameReference} required />
                 </div>
 
                 <div className="col-md-12">
