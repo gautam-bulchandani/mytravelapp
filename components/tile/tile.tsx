@@ -37,9 +37,7 @@ const Tile = (props: any) => {
                   </h4>
                   {props.tileType === "destination" ? (
                     <p>
-                      Paro is an ideal destination for heritage buffs. You will
-                      love the festivals and lush valley views. You will also
-                      enjoy exploring the mountains at Paro.
+                      {props.tileData.description}
                     </p>
                   ) : (
                     ""
