@@ -1,8 +1,14 @@
+import ProductListing from "@/components/Products/productslist";
 import { GetAllAttractions, GetAttractionDetails } from "@/helper/propshelper";
 import Attraction from "@/models/attraction";
 
 const Attraction: React.FC<Attraction> = (props) => {
-  return <h1>{props.name}</h1>;
+  return (
+    <>
+      <h1>{props.name}</h1>
+      <ProductListing data={props.activity} />
+    </>
+  );
 };
 export default Attraction;
 

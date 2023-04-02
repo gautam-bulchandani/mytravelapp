@@ -6,6 +6,7 @@ import {
   GetAllAttractions,
   GetAllDestinations,
   GetAllReviews,
+  GetTitleBlock,
 } from "@/helper/propshelper";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import TileList from "@/components/tile/tilelist";
@@ -60,7 +61,9 @@ export async function getStaticProps() {
   const topAttractions = allAttraction.attractions.filter((attraction) => {
     return attraction.istop === "yes" ? true : false;
   });
-
+  const destTitle = await GetTitleBlock("destination");
+  const attrTitle = await GetTitleBlock("attraction");
+  console.log(destTitle);
   // console.log(allActivities);
   return {
     props: {

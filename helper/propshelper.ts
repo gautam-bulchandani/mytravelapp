@@ -2,6 +2,8 @@ import Activity from "@/models/activity";
 import Attraction from "@/models/attraction";
 import Destination from "@/models/destination";
 import Review from "@/models/review";
+import Hero from "@/models/hero";
+import TitleBlock from "@/models/titleblock";
 
 import { MongoClient } from "mongodb";
 import { connectToDatabase } from "./mongoclient";
@@ -84,8 +86,10 @@ export async function GetAllActivities() {
       istop: activity.istop,
       type: activity.type,
       image: activity.image,
-      review: "",
-      price: "",
+      review: activity.review,
+      price: activity.price,
+      destination: activity.destination,
+      attraction: activity.attraction,
     })),
   };
 }
@@ -159,8 +163,10 @@ export async function GetProductDetails(id: string) {
     istop: result!.istop,
     type: result!.type,
     image: result!.image,
-    review: result!.title,
-    price: result!.title,
+    review: result!.review,
+    price: result!.price,
+    destination: result!.destination,
+    attraction: result!.attraction,
   };
   return {
     activityDetails: activityData,
@@ -177,5 +183,46 @@ export async function GetAllReviews() {
       message: review.message,
       imageurl: review.imageurl,
     })),
+  };
+}
+
+async function GetDictionaryCollection() {
+  const dbKey = process.env.DB_Connection_String as string;
+  const client = MongoClient.connect(dbKey);
+  const db = (await client).db();
+  const collection = db.collection("Dictionary");
+  (await client).close;
+  return collection;
+}
+
+export async function GetHero(page: string) {
+  const dictCollection = GetDictionaryCollection();
+  const hero = (await dictCollection)
+    .find({ type: "hero", page: page })
+    .toArray();
+  const res = (await hero).map<Hero>((item) => ({
+    title: item.title,
+    description: item.description,
+    type: item.type,
+    image: item.image,
+  }));
+  return {
+    result: res[0],
+  };
+}
+
+export async function GetTitleBlock(id: string) {
+  const dictCollection = GetDictionaryCollection();
+  const titleblock = (await dictCollection)
+    .find({ type: "titleblock", id: id })
+    .toArray();
+  const res = (await titleblock).map<TitleBlock>((item) => ({
+    title: item.title,
+    description: item.desc,
+    id: item.id,
+    type: item.type,
+  }));
+  return {
+    result: res[0],
   };
 }

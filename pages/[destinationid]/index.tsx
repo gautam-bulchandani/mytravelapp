@@ -1,3 +1,5 @@
+import TileList from "@/components/tile/tilelist";
+import ProductListing from "@/components/Products/productslist";
 import {
   GetAllDestinations,
   GetDestinationDetails,
@@ -6,7 +8,12 @@ import Destination from "@/models/destination";
 import React from "react";
 
 const Destination: React.FC<Destination> = (props) => {
-  return <h1>{props.title}</h1>;
+  return (
+    <>
+      {/* <TileList data={props.data} tilesType="destination" /> */}
+      <ProductListing data={props.activity} />
+    </>
+  );
 };
 export default Destination;
 
