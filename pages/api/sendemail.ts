@@ -17,11 +17,12 @@ export default async function handler(
     Phone : ${data.phone} <br/>
     Product Name : ${data.productName} <br/>
     Message : ${data.message} <br/>
-  `
+    Customer Email : ${data.email} <br/>
+  `;
   await sendEmail({
-    to: data.email,
+    to: "gbulchandani@horizontal.com",
     subject: "New email for product enquiry",
-    html : message,
+    html: message,
   });
 
   return res.status(200).json({ message: "Email sent successfully" });

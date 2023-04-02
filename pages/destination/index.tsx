@@ -8,15 +8,15 @@ const DestinationPage = (props: any) => {
       <h1>Destination Page</h1>
       <Hero
         data={{
-          image:'/img/hero-carousel/'+props.heroData.image,
-          title:props.heroData.title,
-          description:props.heroData.description,
+          image: "/img/hero-carousel/" + props.heroData.image,
+          title: props.heroData.title,
+          description: props.heroData.description,
         }}
       />
       {/* <section id="constructions" className="constructions top-section">
         <div className="container" data-aos="fade-up"> */}
-          <TileList data={props.allDestinations} tilesType="destination" />
-        {/* </div>
+      <TileList data={props.allDestinations} tilesType="destination" />
+      {/* </div>
       </section> */}
     </>
   );
@@ -24,12 +24,13 @@ const DestinationPage = (props: any) => {
 export default DestinationPage;
 
 export async function getStaticProps() {
-  const heroData = await GetHero('destination');
+  const heroData = await GetHero("destination");
   const allDestinations = await GetAllDestinations();
   return {
     props: {
       allDestinations: allDestinations.destinations,
-      heroData : heroData.result,
+      heroData: heroData.result,
     },
+    revalidate: 60,
   };
 }
