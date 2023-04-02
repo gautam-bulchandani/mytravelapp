@@ -1,4 +1,5 @@
 import { GetProductDetails } from "@/helper/propshelper";
+import SendEmail from "@/components/common/form/sendemail";
 import Activity from "@/models/activity";
 import Image from "next/image";
 
@@ -17,7 +18,8 @@ const Activity: React.FC<Activity> = (props) => {
                 <span>Rating: </span>
               </div>
             </div>
-            {/* Form Component  */}
+            <SendEmail/>
+            
           </div>
 
           <div className="col-lg-8">
