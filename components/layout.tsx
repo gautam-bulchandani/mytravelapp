@@ -15,6 +15,7 @@ const Layout: React.FC<{ children: ReactElement }> = (props) => {
       <Header />
       <main>{props.children}</main>
       <FooterSection />
+      <script type="text/javascript" src="/js/header.js"></script>
     </>
   );
 };
