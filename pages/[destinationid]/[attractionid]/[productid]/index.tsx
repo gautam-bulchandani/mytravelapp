@@ -1,4 +1,5 @@
 import { GetProductDetails } from "@/helper/propshelper";
+import SendEmail from "@/components/common/form/sendemail";
 import Activity from "@/models/activity";
 import { Int32 } from "mongodb";
 import Image from "next/image";
@@ -33,7 +34,8 @@ const Activity: React.FC<Activity> = (props) => {
                   { starList }
               </div>
             </div>
-            {/* Form Component  */}
+            <SendEmail/>
+            
           </div>
 
           <div className="col-lg-8">

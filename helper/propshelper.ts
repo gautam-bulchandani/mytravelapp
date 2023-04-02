@@ -1,17 +1,28 @@
 import Activity from "@/models/activity";
 import Attraction from "@/models/attraction";
 import Destination from "@/models/destination";
+import Review from "@/models/review";
 import Hero from "@/models/hero";
 import TitleBlock from "@/models/titleblock";
 
 import { MongoClient } from "mongodb";
+import { connectToDatabase } from "./mongoclient";
 
 async function GetReactivistsCollection() {
-  const dbKey = process.env.DB_Connection_String as string;
-  const client = MongoClient.connect(dbKey);
-  const db = (await client).db();
+  const client = await connectToDatabase();
+
+  const db = client.db();
   const collection = db.collection("Reactivists");
-  (await client).close;
+  client.close;
+  return collection;
+}
+
+async function GetReactivistsReviewCollection() {
+  const client = await connectToDatabase();
+
+  const db = client.db();
+  const collection = db.collection("Reviews");
+  client.close;
   return collection;
 }
 
@@ -36,6 +47,7 @@ export async function GetAllDestinations() {
       }),
       type: destination.type,
       image: destination.image,
+      heroImage: destination.heroImage,
     })),
   };
 }
@@ -58,6 +70,7 @@ export async function GetAllAttractions() {
       type: attracion.type,
       image: attracion.image,
       destination:attracion.destination,
+      heroImage: attracion.heroImage,
     })),
   };
 }
@@ -78,8 +91,9 @@ export async function GetAllActivities() {
       image: activity.image,
       review: activity.review,
       price: activity.price,
-      destination : activity.destination,
-      attraction :  activity.attraction
+      destination: activity.destination,
+      attraction: activity.attraction,
+      heroImage: activity.heroImage
     })),
   };
 }
@@ -133,6 +147,7 @@ export async function GetAttractionDetails(id: string) {
     type: result!.type,
     image: result!.image,
     heroImage: result!.heroImage,
+    destination: result!.destination,
   };
   return {
     attractionDetail: attractionnData,
@@ -165,6 +180,19 @@ export async function GetProductDetails(id: string) {
     activityDetails: activityData,
   };
 }
+export async function GetAllReviews() {
+  const reactivistsCollection = GetReactivistsReviewCollection();
+  const allReviews = (await reactivistsCollection).find().toArray();
+  return {
+    reviews: (await allReviews).map<Review>((review) => ({
+      name: review.name,
+      email: review.email,
+      phone: review.phone,
+      message: review.message,
+      imageurl: review.imageurl,
+    })),
+  };
+}
 
 async function GetDictionaryCollection() {
   const dbKey = process.env.DB_Connection_String as string;
@@ -175,35 +203,34 @@ async function GetDictionaryCollection() {
   return collection;
 }
 
-export async function GetHero(page:string) {
+export async function GetHero(page: string) {
   const dictCollection = GetDictionaryCollection();
   const hero = (await dictCollection)
-    .find({ type: "hero",page:page })
+    .find({ type: "hero", page: page })
     .toArray();
-  const res = (await hero).map<Hero>((item)=>({
-    title:item.title,
-    description:item.description,
-    type:item.type,
-    image:item.image,
+  const res = (await hero).map<Hero>((item) => ({
+    title: item.title,
+    description: item.description,
+    type: item.type,
+    image: item.image,
   }));
   return {
-    result : res[0],
+    result: res[0],
   };
 }
 
-export async function GetTitleBlock(id:string) {
+export async function GetTitleBlock(id: string) {
   const dictCollection = GetDictionaryCollection();
   const titleblock = (await dictCollection)
-    .find({ type: "titleblock",id:id })
+    .find({ type: "titleblock", id: id })
     .toArray();
-  const res = (await titleblock).map<TitleBlock>((item)=>({
-    title:item.title,
-    description:item.desc,
-    id:item.id,
-    type:item.type
+  const res = (await titleblock).map<TitleBlock>((item) => ({
+    title: item.title,
+    description: item.desc,
+    id: item.id,
+    type: item.type,
   }));
   return {
-    result : res[0],
+    result: res[0],
   };
 }
-
