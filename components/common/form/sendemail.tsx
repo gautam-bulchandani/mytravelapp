@@ -1,7 +1,7 @@
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useRef } from "react";
 
 export default function SendEmail() {
-  const [submitted, setSubmitted] = useState(false);
+
   const nameReference = useRef<HTMLInputElement>(null);
   const emailReference = useRef<HTMLInputElement>(null);
   const phoneReference = useRef<HTMLInputElement>(null);
@@ -25,55 +25,55 @@ export default function SendEmail() {
         "Content-Type": "application/json",
       },
     });
-    if(response.ok){
-      setSubmitted(true);
-    }
   };
 
   return (
-    <>
-    <h1>Our travel App</h1>
-      {submitted === false  &&             
-      <form method="post" onSubmit={formSubmitHandler}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          ref={nameReference}
-        ></input>
+    <section id="get-started" className="get-started section-bg">
+      <div className="container">
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          ref={emailReference}
-        ></input>
+        <div className="row justify-content-between gy-4">
 
-        <input
-          type="text"
-          name="phone"
-          placeholder="Phone Number"
-          ref={phoneReference}
-        ></input>
+          <div className="col-12">
+            <form method="post" className="php-email-form" onSubmit={formSubmitHandler}>
+              <h2>Enquire Now</h2>
+              <p>Please share your queries by filling up the below form</p>
+              <div className="row gy-3">
 
-        <input
-          type="text"
-          name="productName"
-          placeholder="Product Name"
-          ref={prodnameReference}
-        ></input>
+                <div className="col-md-12">
+                  <input type="text" name="name" className="form-control" placeholder="Name" ref={nameReference} required />
+                </div>
 
-        <input
-          type="text"
-          name="message"
-          placeholder="Message"
-          ref={messageReference}
-        ></input>
-        
-        <button type="submit">Send Email</button>
-      </form>
-    }
-      {submitted && <div>Thank you for submitting the form!</div>}
-    </>
+                <div className="col-md-12 ">
+                  <input type="email" className="form-control" name="email" placeholder="Email" ref={emailReference} required />
+                </div>
+
+                <div className="col-md-12">
+                  <input type="text" className="form-control" name="phone" placeholder="Phone" ref={phoneReference} required />
+                </div>
+				
+				<div className="col-md-12">
+                  <input type="text" className="form-control" name="productName" placeholder="Product Name" ref={prodnameReference} required />
+                </div>
+
+                <div className="col-md-12">
+                  <input className="form-control" name="message" placeholder="Message" ref={messageReference} required />
+                </div>
+
+                <div className="col-md-12 text-center">
+                  <div className="loading" style={{display:"none"}}>Loading....</div>
+                  <div className="error-message"style={{display:"none"}}></div>
+                  <div className="sent-message"style={{display:"none"}}>Your quote request has been sent successfully. Thank you!</div>
+
+                  <button type="submit">Enquire Now</button>
+                </div>
+
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
   );
 }
