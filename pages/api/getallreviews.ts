@@ -16,7 +16,7 @@ export default async function handler(
     const client = await connectToDatabase();
     const db = client.db();
     const newsCollection = db.collection("Reviews");
-    const allReviewsCollection = newsCollection.find().toArray();
+    const allReviewsCollection = await newsCollection.find().toArray();
 
     res.status(200).json({
       reviews: (await allReviewsCollection).map<Review>((review) => ({
@@ -27,6 +27,7 @@ export default async function handler(
         imageurl: review.imageurl,
       })),
     });
+    client.close();
   } catch (ex) {
     console.log(ex);
   }

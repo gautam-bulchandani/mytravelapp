@@ -18,8 +18,9 @@ export default async function handler(
       const client = await connectToDatabase();
       const db = client.db();
       const newsCollection = db.collection("Reviews");
-      newsCollection.deleteOne({ name: data });
+      await newsCollection.deleteOne({ name: data });
       res.status(200).json({ message: "Data Deleted" });
+      client.close();
     }
   } catch (ex) {
     console.log(ex);

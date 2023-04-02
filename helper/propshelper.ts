@@ -27,11 +27,15 @@ async function GetReactivistsReviewCollection() {
 }
 
 export async function GetAllDestinations() {
-  const reactivistsCollection = GetReactivistsCollection();
-  const allDestination = (await reactivistsCollection)
+  const client = await connectToDatabase();
+
+  const db = client.db();
+  const collection = db.collection("Reactivists");
+  const reactivistsCollection = collection;
+  const allDestination = await reactivistsCollection
     .find({ type: "destination" })
     .toArray();
-
+  client.close();
   return {
     destinations: (await allDestination).map<Destination>((destination) => ({
       name: destination.name,
@@ -51,11 +55,15 @@ export async function GetAllDestinations() {
   };
 }
 export async function GetAllAttractions() {
-  const reactivistsCollection = GetReactivistsCollection();
-  const allAttraction = (await reactivistsCollection)
+  const client = await connectToDatabase();
+
+  const db = client.db();
+  const collection = db.collection("Reactivists");
+  const reactivistsCollection = collection;
+  const allAttraction = await reactivistsCollection
     .find({ type: "attraction" })
     .toArray();
-
+  client.close();
   return {
     attractions: (await allAttraction).map<Attraction>((attracion) => ({
       name: attracion.name,
@@ -72,11 +80,15 @@ export async function GetAllAttractions() {
   };
 }
 export async function GetAllActivities() {
-  const reactivistsCollection = GetReactivistsCollection();
-  const allActivities = (await reactivistsCollection)
+  const client = await connectToDatabase();
+
+  const db = client.db();
+  const collection = db.collection("Reactivists");
+  const reactivistsCollection = collection;
+  const allActivities = await reactivistsCollection
     .find({ type: "activity" })
     .toArray();
-
+  client.close();
   return {
     activities: (await allActivities).map<Activity>((activity) => ({
       name: activity.name,
@@ -95,12 +107,17 @@ export async function GetAllActivities() {
 }
 
 export async function GetDestinationDetails(id: string) {
-  const reactivistsCollection = GetReactivistsCollection();
-  const destination = (await reactivistsCollection).findOne({
+  const client = await connectToDatabase();
+
+  const db = client.db();
+  const collection = db.collection("Reactivists");
+  const reactivistsCollection = collection;
+  const destination = await reactivistsCollection.findOne({
     type: "destination",
     name: id,
   });
   const result = await destination;
+  client.close();
   const destinationData: Destination = {
     name: result!.name,
     title: result!.title,
@@ -122,12 +139,18 @@ export async function GetDestinationDetails(id: string) {
 }
 
 export async function GetAttractionDetails(id: string) {
-  const reactivistsCollection = GetReactivistsCollection();
-  const attracion = (await reactivistsCollection).findOne({
+  const client = await connectToDatabase();
+
+  const db = client.db();
+  const collection = db.collection("Reactivists");
+  const reactivistsCollection = collection;
+
+  const attracion = await reactivistsCollection.findOne({
     type: "attraction",
     name: id,
   });
   const result = await attracion;
+  client.close();
   if (result == null) return null;
   const attractionnData: Attraction = {
     name: result!.name,
@@ -148,12 +171,17 @@ export async function GetAttractionDetails(id: string) {
 }
 
 export async function GetProductDetails(id: string) {
-  const reactivistsCollection = GetReactivistsCollection();
-  const activity = (await reactivistsCollection).findOne({
+  const client = await connectToDatabase();
+
+  const db = client.db();
+  const collection = db.collection("Reactivists");
+  const reactivistsCollection = collection;
+  const activity = await reactivistsCollection.findOne({
     type: "activity",
     name: id,
   });
   const result = await activity;
+  client.close();
   if (result == null) return null;
   const activityData: Activity = {
     name: result!.name,
@@ -173,8 +201,12 @@ export async function GetProductDetails(id: string) {
   };
 }
 export async function GetAllReviews() {
-  const reactivistsCollection = GetReactivistsReviewCollection();
-  const allReviews = (await reactivistsCollection).find().toArray();
+  const client = await connectToDatabase();
+
+  const db = client.db();
+  const collection = db.collection("Reviews");
+  const allReviews = await collection.find().toArray();
+  client.close();
   return {
     reviews: (await allReviews).map<Review>((review) => ({
       name: review.name,
@@ -196,11 +228,14 @@ async function GetDictionaryCollection() {
 }
 
 export async function GetHero(page: string) {
-  const dictCollection = GetDictionaryCollection();
-  const hero = (await dictCollection)
-    .find({ type: "hero", page: page })
-    .toArray();
-  const res = (await hero).map<Hero>((item) => ({
+  const client = await connectToDatabase();
+
+  const db = client.db();
+  const collection = db.collection("Dictionary");
+
+  const hero = await collection.find({ type: "hero", page: page }).toArray();
+  client.close();
+  const res = hero.map<Hero>((item) => ({
     title: item.title,
     description: item.description,
     type: item.type,
@@ -212,11 +247,15 @@ export async function GetHero(page: string) {
 }
 
 export async function GetTitleBlock(id: string) {
-  const dictCollection = GetDictionaryCollection();
-  const titleblock = (await dictCollection)
+  const client = await connectToDatabase();
+
+  const db = client.db();
+  const collection = db.collection("Dictionary");
+  const titleblock = await collection
     .find({ type: "titleblock", id: id })
     .toArray();
-  const res = (await titleblock).map<TitleBlock>((item) => ({
+  client.close();
+  const res = titleblock.map<TitleBlock>((item) => ({
     title: item.title,
     description: item.desc,
     id: item.id,

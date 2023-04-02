@@ -51,8 +51,8 @@ const AddReviewForm: React.FC<{ AddReview: () => void }> = (props) => {
             >
               <h3>Submit your Reviews</h3>
               <p>
-                Vel nobis odio laboriosam et hic voluptatem. Inventore vitae
-                totam. Rerum repellendus enim linead sero park flows.
+                Your feedback is highly appreciated and will help us to improve
+                our ability to serve you and other users of our web sites.
               </p>
               <div className="row gy-3">
                 <div className="col-md-12">

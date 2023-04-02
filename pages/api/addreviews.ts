@@ -18,8 +18,9 @@ export default async function handler(
       const client = await connectToDatabase();
       const db = client.db();
       const newsCollection = db.collection("Reviews");
-      newsCollection.insertOne(data);
+      await newsCollection.insertOne(data);
       res.status(201).json({ message: "Data Inserted" });
+      client.close();
     }
   } catch (ex) {
     console.log(ex);
