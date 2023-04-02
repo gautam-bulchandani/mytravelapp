@@ -1,7 +1,7 @@
-import { FormEvent, useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
 
 export default function SendEmail() {
-
+  const [submitted, setSubmitted] = useState(false);  
   const nameReference = useRef<HTMLInputElement>(null);
   const emailReference = useRef<HTMLInputElement>(null);
   const phoneReference = useRef<HTMLInputElement>(null);
@@ -25,14 +25,19 @@ export default function SendEmail() {
         "Content-Type": "application/json",
       },
     });
+   
+    if(response.ok){
+      setSubmitted(true);
+    }
   };
 
   return (
     <section id="get-started" className="get-started section-bg">
+      {submitted == false && 
       <div className="container">
 
         <div className="row justify-content-between gy-4">
-
+        
           <div className="col-12">
             <form method="post" className="php-email-form" onSubmit={formSubmitHandler}>
               <h2>Enquire Now</h2>
@@ -59,21 +64,23 @@ export default function SendEmail() {
                   <input className="form-control" name="message" placeholder="Message" ref={messageReference} required />
                 </div>
 
-                <div className="col-md-12 text-center">
-                  <div className="loading" style={{display:"none"}}>Loading....</div>
-                  <div className="error-message"style={{display:"none"}}></div>
-                  <div className="sent-message"style={{display:"none"}}>Your quote request has been sent successfully. Thank you!</div>
-
+                <div className="col-md-12 text-center">     
+                               
                   <button type="submit">Enquire Now</button>
                 </div>
 
               </div>
             </form>
+        
+            
           </div>
-
+        
+      
         </div>
 
       </div>
+        }
+      {submitted && <div className="sent-message">Thank you! Your Enquiry has been submitted.</div>}
     </section>
   );
 }
