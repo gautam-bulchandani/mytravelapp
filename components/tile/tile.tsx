@@ -2,6 +2,9 @@ import Link from "next/link";
 import { useEffect } from "react";
 
 const Tile = (props: any) => {
+  if (props.tileType==="relattraction"){
+    console.log(props.tileData)
+  }
   return (
     <>
       <div className="col-lg-6">
@@ -10,7 +13,7 @@ const Tile = (props: any) => {
             href={
               props.tileType === "destination"
                 ? props.tileData.name
-                : props.tileData.destination + "/" + props.tileData.name
+                : "/"+props.tileData.destination + "/" + props.tileData.name
             }
             className="card-link"
           >
@@ -20,7 +23,7 @@ const Tile = (props: any) => {
                   className="card-bg"
                   style={{
                     backgroundImage: `url('${
-                      props.tileType === "attraction"
+                      props.tileType === "attraction" || "relattraction"
                         ? "/img/Attractions/" + props.tileData.image
                         : "/img/destinations/" + props.tileData.image
                     }')`,

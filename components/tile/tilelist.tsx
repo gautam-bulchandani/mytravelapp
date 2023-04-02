@@ -79,7 +79,7 @@ const TileList = (props: any) => {
               ? props.data.map((attractions: Attraction) => {
                   return (
                     <>
-                      <Tile key={attractions.name} tileData={attractions} tileType="attraction" />{" "}
+                      <Tile key={attractions.name} tileData={attractions} tileType={props.tilesType === "attraction" ? "attraction" : "relattraction"} />{" "}
                       <br />
                     </>
                   );
