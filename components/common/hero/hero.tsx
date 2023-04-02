@@ -1,5 +1,5 @@
 import styles from "./hero.module.css";
-const Hero = (props:any) => {
+const Hero = (props: any) => {
   return (
     <>
       <div
@@ -8,7 +8,7 @@ const Hero = (props:any) => {
           display: "flex",
           alignItems: "center",
           backgroundImage: `url(${props.data.image})`,
-          justifyContent:"center"
+          justifyContent: "center",
         }}
       >
         <div
@@ -19,12 +19,9 @@ const Hero = (props:any) => {
             alignItems: "center",
             display: "flex",
           }}
-          
         >
           <h3 className="white-font">{props.data.title}</h3>
-          <p className="white-font">
-            {props.data.description}
-          </p>
+          <p className="white-font">{props.data.description}</p>
         </div>
       </div>
     </>

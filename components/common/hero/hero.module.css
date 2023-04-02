@@ -45,16 +45,16 @@
   text-decoration: underline;
 }
 
-.breadcrumbs ol li+li {
+.breadcrumbs ol li + li {
   padding-left: 10px;
 }
 
-.breadcrumbs ol li+li::before {
+.breadcrumbs ol li + li::before {
   display: inline-block;
   padding-right: 10px;
   color: #fff;
   content: "/";
 }
-.whiteFont{
-	color: white;
+.whiteFont {
+  color: white;
 }
