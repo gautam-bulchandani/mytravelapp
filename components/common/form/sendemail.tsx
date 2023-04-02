@@ -1,7 +1,7 @@
-import { FormEvent, useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
 
 export default function SendEmail() {
-
+  const [submitted, setSubmitted] = useState(false);
   const nameReference = useRef<HTMLInputElement>(null);
   const emailReference = useRef<HTMLInputElement>(null);
   const phoneReference = useRef<HTMLInputElement>(null);
@@ -25,11 +25,15 @@ export default function SendEmail() {
         "Content-Type": "application/json",
       },
     });
+    if(response.ok){
+      setSubmitted(true);
+    }
   };
 
   return (
     <>
-      <h1>Our travel App</h1>
+    <h1>Our travel App</h1>
+      {submitted === false  &&             
       <form method="post" onSubmit={formSubmitHandler}>
         <input
           type="text"
@@ -68,6 +72,8 @@ export default function SendEmail() {
         
         <button type="submit">Send Email</button>
       </form>
+    }
+      {submitted && <div>Thank you for submitting the form!</div>}
     </>
   );
 }
