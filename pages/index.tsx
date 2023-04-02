@@ -5,74 +5,72 @@ import {
   GetAllActivities,
   GetAllAttractions,
   GetAllDestinations,
+  GetAllReviews,
+  GetTitleBlock,
 } from "@/helper/propshelper";
-import { FormEvent, useRef } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import TileList from "@/components/tile/tilelist";
 import ProductListing from "@/components/Products/productslist";
+import AddReviewForm from "@/components/review/addreviews";
+import ReviewList from "@/components/review/reviewlist";
 
-export default function Home(props:any) {
-  const nameReference = useRef<HTMLInputElement>(null);
-  const emailReference = useRef<HTMLInputElement>(null);
-  const formSubmitHandler = async (event: FormEvent) => {
-    event.preventDefault();
+export default function Home(props: any) {
+  const [reviewAdded, ReviewAddedStatus] = useState(0);
+  const [reviewDeleted, ReviewDeletedStatus] = useState(0);
+  const [totalReviews, SetReviewStatus] = useState(props.allReviews);
+  const BlogDeleteddHandler = () => {
+    ReviewDeletedStatus(Math.random());
+  };
+  const ReviewAddedHandler = () => {
+    ReviewAddedStatus(Math.random());
+  };
 
-    const emailBody = {
-      name: nameReference.current!.value,
-      email: emailReference.current!.value,
-    };
-
-    const response = fetch("/api/sendemail", {
-      method: "POST",
-      body: JSON.stringify(emailBody),
+  useEffect(() => {
+    const response = fetch("/api/getallreviews", {
       headers: {
         "Content-Type": "application/json",
       },
-    });
-  };
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        SetReviewStatus(data.reviews);
+      });
+  }, [reviewAdded, reviewDeleted]);
 
   return (
     <>
-    
-    <TileList data = {props.topDestinations} tilesType = 'destination' />
-    <TileList data = {props.topAttractions} tilesType = 'attraction' />
-    <ProductListing data={props.allActivities} />
-      <h1>Our travel App</h1>
-      <form method="post" onSubmit={formSubmitHandler}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          ref={nameReference}
-        ></input>
-
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          ref={emailReference}
-        ></input>
-        <button type="submit">Send Email</button>
-      </form>
+      <TileList data={props.topDestinations} tilesType="destination" />
+      <TileList data={props.topAttractions} tilesType="attraction" />
+      <ProductListing data={props.allActivities} />
+      <AddReviewForm AddReview={ReviewAddedHandler}></AddReviewForm>
+      <ReviewList
+        DeleteReview={BlogDeleteddHandler}
+        items={totalReviews}
+      ></ReviewList>
     </>
   );
 }
 export async function getStaticProps() {
   const allDestinations = await GetAllDestinations();
   const allAttraction = await GetAllAttractions();
-   const allActivities = await GetAllActivities();
-  const topDests = allDestinations.destinations.filter((dest)=>{
-    return dest.istop ==='yes' ? true : false
-  })
-  const topAttractions = allAttraction.attractions.filter((attraction)=>{
-    return attraction.istop ==='yes' ? true : false
-  })
-
+  const allActivities = await GetAllActivities();
+  const allReviews = await GetAllReviews();
+  const topDests = allDestinations.destinations.filter((dest) => {
+    return dest.istop === "yes" ? true : false;
+  });
+  const topAttractions = allAttraction.attractions.filter((attraction) => {
+    return attraction.istop === "yes" ? true : false;
+  });
+  const destTitle = await GetTitleBlock("destination");
+  const attrTitle = await GetTitleBlock("attraction");
+  console.log(destTitle);
   // console.log(allActivities);
   return {
     props: {
-      topDestinations:topDests,
-      topAttractions:topAttractions,
-      allActivities : allActivities.activities,
-    }
+      topDestinations: topDests,
+      topAttractions: topAttractions,
+      allActivities: allActivities.activities,
+      allReviews: allReviews.reviews,
+    },
   };
 }
